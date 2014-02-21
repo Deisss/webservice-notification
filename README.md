@@ -120,12 +120,12 @@ Will try to find user with id 1 and 2 into websocket system, if one of them is n
 
 
 Those elements represent a notification in most of existings system. But this system is able to do little more, so we provide extra parameters:
-    * **email_send**: a boolean indicate is system should send an email if one or more user is not currently connected to websocket system (=not online)
-    * **email_force**: no matter if user is connected or not, they should ALL recieve email notification
-    * **email_subject**: A subject for the email
-    * **email_content**: The email content
-    * **email_mime** (default: 1.0): email MIME Version
-    * **email_type** (default: text/html): The content type of the email
+  * **email_send**: a boolean indicate is system should send an email if one or more user is not currently connected to websocket system (=not online)
+  * **email_force**: no matter if user is connected or not, they should ALL recieve email notification
+  * **email_subject**: A subject for the email
+  * **email_content**: The email content
+  * **email_mime** (default: 1.0): email MIME Version
+  * **email_type** (default: text/html): The content type of the email
 
 *Note*: if email_send is not activated, system will never send email, so you need this parameter if you want to use email service.
 *Note2*: only one email is sent, with everybody in BCC.
@@ -145,16 +145,16 @@ The client API is only composed with a single websocket, so the whole API is bas
 As websocket is bi-directionnal, we separate them:
 
 **From client to server:**
-    * **unseen**: get the unseen notifications for the given user. It should not be so much needed, as everytime user connect to socket, you get exactly this return. Take no parameter.
-    * **content**: get page by page existing notifications (no matter they are unseen or not). Take page (integer) as parameter.
-    * **seen**: mark some notification as seen. Take an array of ObjectId's as parameter (the *_id* field from every notification).
-    * **delete**: mark some notification as deleted. Take an array of ObjectId's as parameter (the *_id* field from every notification).
+  * **unseen**: get the unseen notifications for the given user. It should not be so much needed, as everytime user connect to socket, you get exactly this return. Take no parameter.
+  * **content**: get page by page existing notifications (no matter they are unseen or not). Take page (integer) as parameter.
+  * **seen**: mark some notification as seen. Take an array of ObjectId's as parameter (the *_id* field from every notification).
+  * **delete**: mark some notification as deleted. Take an array of ObjectId's as parameter (the *_id* field from every notification).
 
 We strongly recommand you to check the example provided to have a working base to modify, and also check how to use those elements.
 
 **From server to client:**
-    * **notification**: The server send some new notification, or requested notification to user
-    * **seen**: Some notification have been marked as 'seen', we should apply modification...
-    * **delete**: Some notification have been marked as 'deleted', we should remove them...
+  * **notification**: The server send some new notification, or requested notification to user
+  * **seen**: Some notification have been marked as 'seen', we should apply modification...
+  * **delete**: Some notification have been marked as 'deleted', we should remove them...
 
 The notification is highly used by most of functions, the client is the only one to make distinction between different type and/or seen state.
