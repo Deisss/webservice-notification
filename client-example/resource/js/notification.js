@@ -122,8 +122,9 @@ var notification = {
                 // Send the event
                 setTimeout(function() {
                     fct({
-                        event:   name,
-                        element: el,
+                        event:        name,
+                        element:      el,
+                        notification: el,
                         seen:    seenLength,
                         unseen:  unseenLength,
                         all:     allLength,
