@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>WebService Notification Example</title>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="resource/css/main.css">
+  </head>
+  <body>
+    <nav role="navigation" class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header"><a class="navbar-brand">WebService Notification Example</a></div>
+        <div class="collapse navbar-collapse">
+          <form id="signin" onsubmit="doLogin();return false;">
+            <input type="text" id="login" name="login" placeholder="Login" class="form-control">
+            <input type="password" id="password" name="password" placeholder="Password" class="form-control">
+            <input type="submit" value="Sign in" class="btn btn-primary">
+          </form>
+          <div id="signout">
+            <button onclick="doLogout();" class="btn btn-danger">Sign out</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div id="hide-before-login">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-7">
+            <div>
+              <h4>Content receive</h4>
+            </div>
+            <div>
+              <button onclick="doClear();" class="btn btn-primary">Clear</button>
+              <button onclick="doClear();doUnseen();" class="btn">Get unseen</button>
+              <button onclick="doClear();doContent();" class="btn">Get first page</button><span> &lt;= Those are just example, you can of course get more...</span>
+            </div>
+            <div id="content-show"></div>
+          </div>
+          <div class="col-md-5 submit-panel">
+            <h4>Submit a new notification</h4>
+            <form id="notify" onsubmit="doNotify();return false;">
+              <label>Title</label>
+              <input type="text" id="title" name="title" placeholder="Notification Title" class="form-control">
+              <label>Content</label>
+              <input type="text" id="content" name="content" placeholder="Notification Content" class="form-control">
+              <label>URL</label>
+              <input type="text" id="url" name="url" placeholder="Notification URL" class="form-control">
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Icon</label>
+                  <input type="text" id="icon" name="icon" placeholder="Notification icon" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label>Image</label>
+                  <input type="text" id="image" name="image" placeholder="Notification image (like people face)" class="form-control">
+                </div>
+              </div>
+              <label>Users</label>
+              <input type="text" id="users" name="users" placeholder="Users, like [{&quot;id&quot;: &quot;1&quot;, &quot;email&quot;: &quot;test@gmail.com&quot;}]" class="form-control">
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Email to send ?</label>
+                  <input type="text" id="email_send" name="email_send" placeholder="Should send an email ? 1 or 0" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label>Force email ?</label>
+                  <input type="text" id="email_force" name="email_force" placeholder="Even if user is online, send an email ? 1 or 0" class="form-control">
+                </div>
+              </div>
+              <label>Email subject</label>
+              <input type="text" id="email_subject" name="email_subject" placeholder="Email subject" class="form-control">
+              <label>Email content</label>
+              <input type="text" id="email_content" name="email_content" placeholder="Email content" class="form-control"><br><br>
+              <div class="pull-right">
+                <input type="submit" class="btn btn-primary">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="hide-after-login">
+      <div class="alert alert-info">
+        <p>You need to sign in first before using this example !</p>
+      </div>
+    </div>
+    <div id="single-notification" style="display:none">
+      <div class="container-fluid clearfix">
+        <div class="row">
+          <div class="col-md-10">
+            <h4></h4>
+            <p></p><span></span>
+          </div>
+          <div class="col-md-2 text-right">
+            <button type="button" aria-hidden="true" onclick="doSeen(this);" class="close">&times;</button>
+            <div class="separator"><br><br></div><a target="_blank" class="link pull-right"><i class="glyphicon glyphicon-paperclip"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Script loading-->
+    <script src="//cdn.sockjs.org/sockjs-0.3.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="resource/js/vendor/sha512.min.js"></script>
+    <script src="resource/js/socket.js"></script>
+    <script src="resource/js/notification.js"></script>
+    <script src="resource/js/action.js"></script>
+  </body>
+</html>

@@ -1,0 +1,98 @@
+!!! 5
+html(xml:lang='en', xmlns='http://www.w3.org/1999/xhtml')
+    head
+        title='WebService Notification Example'
+        link(rel='stylesheet', type='text/css', href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
+        link(rel='stylesheet', type='text/css', href='resource/css/main.css')
+
+    body
+        nav.navbar.navbar-default(role='navigation')
+            .container-fluid
+                .navbar-header
+                    a.navbar-brand='WebService Notification Example'
+
+                .collapse.navbar-collapse
+                    form#signin(onsubmit='doLogin();return false;')
+                        input.form-control(type='text',     id='login',    name='login',    placeholder='Login')
+                        input.form-control(type='password', id='password', name='password', placeholder='Password')
+                        input.btn.btn-primary(type='submit', value='Sign in')
+                    #signout
+                        button.btn.btn-danger(onclick='doLogout();')='Sign out'
+
+
+        #hide-before-login
+            .container-fluid
+                .row
+                    .col-md-7
+                        div
+                            h4='Content receive'
+                        div
+                            button.btn.btn-primary(onclick='doClear();')='Clear'
+                            button.btn(onclick='doClear();doUnseen();')='Get unseen'
+                            button.btn(onclick='doClear();doContent();')='Get first page'
+                            span=' <= Those are just example, you can of course get more...'
+                        #content-show
+
+                    .col-md-5.submit-panel
+                        h4='Submit a new notification'
+                        form(id='notify', onsubmit='doNotify();return false;')
+                            label='Title'
+                            input.form-control(type='text', id='title',   name='title',   placeholder='Notification Title')
+                            label='Content'
+                            input.form-control(type='text', id='content', name='content', placeholder='Notification Content')
+                            label='URL'
+                            input.form-control(type='text', id='url',     name='url',     placeholder='Notification URL')
+                            .row
+                                .col-md-6
+                                    label='Icon'
+                                    input.form-control(type='text', id='icon',    name='icon',    placeholder='Notification icon')
+                                .col-md-6
+                                    label='Image'
+                                    input.form-control(type='text', id='image',   name='image',   placeholder='Notification image (like people face)')
+                            label='Users'
+                            input.form-control(type='text', id='users',   name='users',   placeholder='Users, like [{"id": "1", "email": "test@gmail.com"}]')
+                            .row
+                                .col-md-6
+                                    label='Email to send ?'
+                                    input.form-control(type='text', id='email_send',    name='email_send',    placeholder='Should send an email ? 1 or 0')
+                                .col-md-6
+                                    label='Force email ?'
+                                    input.form-control(type='text', id='email_force',   name='email_force',   placeholder='Even if user is online, send an email ? 1 or 0')
+                            label='Email subject'
+                            input.form-control(type='text', id='email_subject', name='email_subject', placeholder='Email subject')
+                            label='Email content'
+                            input.form-control(type='text', id='email_content', name='email_content', placeholder='Email content')
+                            br
+                            br
+                            .pull-right
+                                input.btn.btn-primary(type='submit')
+
+        #hide-after-login
+            .alert.alert-info
+                p='You need to sign in first before using this example !'
+
+        #single-notification(style='display:none')
+            div.container-fluid.clearfix
+                .row
+                    .col-md-10
+                        h4
+                        p
+                        span
+                    .col-md-2.text-right
+                        button.close(type='button', aria-hidden='true', onclick='doSeen(this);')!='&times;'
+                        .separator
+                            br
+                            br
+                        a.link.pull-right(target='_blank')
+                            i.glyphicon.glyphicon-paperclip
+
+
+
+        // Script loading
+        script(src='//cdn.sockjs.org/sockjs-0.3.min.js')
+        script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+        script(src='resource/js/vendor/sha512.min.js')
+
+        script(src='resource/js/socket.js')
+        script(src='resource/js/notification.js')
+        script(src='resource/js/action.js')

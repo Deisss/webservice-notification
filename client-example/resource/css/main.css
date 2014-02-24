@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.inline {
+  display: inline;
+}
+#signin,
+#signout {
+  text-align: right;
+  margin-top: 8px;
+}
+#signin input,
+#signout input {
+  display: inline;
+  width: 200px;
+}
+#signin input[type='submit'],
+#signout input[type='submit'] {
+  width: 120px;
+  margin-top: -2px;
+}
+.unseen-notification,
+.seen-notification {
+  border: 1px solid #DDD;
+  border-top: 0 none;
+  padding: 20px 18px;
+}
+.unseen-notification {
+  background: #d8ecf9;
+}
+.seen-notification {
+  background: #f0f0f0;
+}
+.seen-notification .close,
+.seen-notification .separator {
+  display: none;
+}
+.seen-notification:first-child,
+.unseen-notification:first-child {
+  border-top: 1px solid #DDD;
+}
+.seen-notification:nth-child(2n) {
+  background: #FFF;
+}
+#hide-before-login,
+#signout {
+  display: none;
+}
+#hide-after-login {
+  display: block;
+  margin-top: 60px;
+}
+#hide-after-login .alert-info {
+  width: 600px;
+  max-width: 600px;
+  text-align: center;
+  margin: 0 auto;
+}
+#content-show {
+  margin-top: 20px;
+}
+.submit-panel {
+  background: #F8F8F8;
+  border: 1px solid #DDD;
+  border-right: 0px none;
+}
