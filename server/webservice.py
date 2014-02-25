@@ -61,6 +61,13 @@ class ServiceRequestManager(JsonDefaultHandler):
         users   = json.loads(self.get_argument('users', '[]'))
 
 
+        if len(users) == 0:
+            logging.error('notify: NO USER SPECIFIED, you have to specify: ' +
+                'at least one:' +
+                '\n\ttitle: %s\n\turl: %s\n\tcontent: %s\n'
+                % (title, url, content))
+
+
 
         # Email stuff
         # System should send an email...
