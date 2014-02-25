@@ -1,5 +1,20 @@
-ws_notification is a system allowing to push important event to user, in real time.
-Basically on the first hand, you will have a server which will ask a notification, and, on the other hand; this server to send a new event to every related user.
+# Server
+
+This is the entry point for the notification server.
+
+This server is a full python/MongoDB system. It needs the following pip installation:
+
+```
+pip install tornado pymongo sockjs-tornado sockjsroom PyDispatcher
+```
+
+And a configuration file setted on ```config.ini```.
 
 
-This folder contains the server side, in python, you need to follow configuration provided in root directory before using this.
+## How to use
+
+From a server you already have, you want to implement a notification system on top of your existing system: you simply want to do a POST request on ```/notify``` to register a new notification to listed users.
+
+On the other side (client side), users have to subscribe to websocket provided by this server.
+
+For more information, just go to main [README.md file](https://github.com/Deisss/webservice-notification) 
