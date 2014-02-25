@@ -165,3 +165,15 @@ We strongly recommand you to check the example provided to have a working base t
 
 The notification is highly used by most of functions.
 From this API, now the client has to deal with information given, the seen and delete state should be enough to control the notification lifetime.
+
+
+
+## The case MySQL
+
+We didn't talk until now about MySQL issue, here is. When user logon on webservice, the login and password are checked before allowing to use our notification system. This auth, is based on a MySQL db, as many system are using MySQL for user access instead of MongoDB.
+If you plan to use something else (different auth method / different db), you can change this, by editing function ```loginUser``` into ```system/CommonMySQL.py``` (on server side of course) with your own authentification code.
+This function is a simple "give me a login/password, I will give you a unique ID to identify this user". This id then, can be passed as parameter on ```/notify``` (see server API above)
+
+We chose this way, as we wanted to provide a kind of 'full example' where you need only the minimum changes to integrate this system to your own existing system. This is also why you send on notify email content: we wanted to keep it with the minimum integration possible.
+
+From this point of view, this is the reason while we choose this: we provide a real example, on one of the most used DB. Allowing you to quickly understand how to modify it, and have fun !
