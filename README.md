@@ -106,6 +106,8 @@ Server(s) can send new notifications threw a single URL:
 
 **/!\ Except content, all elements are not required. This is simply due to the fact that server doesn't do anything with! The client may use some or all of them (you decide). Basically this server only make relation between notification and user, so it doesn't use them at all, only store them...**
 
+**/!\ Remember also that users are important: if you specify none of them, nothing will happend/be done... As the server create one notification for one user in database.**
+
 The **users** parameter is the most important here, it's a simple JSON document (in string format) indicating who is concerned by this notification, let's show an example as it's quite easy:
 ```
 [
