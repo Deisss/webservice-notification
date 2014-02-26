@@ -6,6 +6,7 @@ from pydispatch import dispatcher
 from datetime   import datetime
 
 from system.CommonMongoDB import createNotification
+from system.ConfigLoader import getCfg
 from system.EmailNotification import send
 
 import json, logging
@@ -44,6 +45,20 @@ def getBooleanRealValue(b):
 class ServiceRequestManager(JsonDefaultHandler):
     ''' Register a notification to user '''
     def post(self):
+        # Before anything else, if APIKey is defined, we check it...
+        APIKeyDefined = getCfg('APPLICATION', 'apikey')
+        if(APIKeyDefined is not None) and (APIKeyDefined != ''):
+            APIKeySubmitted = self.get_argument('apikey', '')
+            if APIKeyDefined != APIKeySubmitted:
+                self.set_status(400)
+                self.finish('<html><body>API Key refused</body></html>')
+                logging.error(
+                    'notify: API Key refused, given: %s, allowed: %s' %
+                    (APIKeySubmitted, APIKeyDefined)
+                )
+                return
+
+
         # Will throw an HTTP 400 if missing
         content = self.get_argument('content')
 
@@ -59,13 +74,6 @@ class ServiceRequestManager(JsonDefaultHandler):
         image   = self.get_argument('image', '')
         # Users linked to the notification (user should recieve notification)
         users   = json.loads(self.get_argument('users', '[]'))
-
-
-        if len(users) == 0:
-            logging.error('notify: NO USER SPECIFIED, you have to specify: ' +
-                'at least one:' +
-                '\n\ttitle: %s\n\turl: %s\n\tcontent: %s\n'
-                % (title, url, content))
 
 
 
