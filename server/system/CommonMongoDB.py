@@ -8,6 +8,17 @@ from bson.objectid import ObjectId
 
 _collection = getCfg('MONGODB', 'db')
 
+
+#
+# ------------------------
+#   INDEX
+# ------------------------
+#
+def mongoIndex(db):
+    ''' Try to generate indexes if needed '''
+    db.ensure_index([('_userId', 1), ('seen', 1), ('delete', 1)], unique=False)
+
+
 #
 # ------------------------
 #   NOTIFICATIONS
@@ -16,6 +27,7 @@ _collection = getCfg('MONGODB', 'db')
 def createNotification(notifications):
     ''' Register a new notification into database '''
     db  = connect(_collection)
+    mongoIndex(db)
     now = datetime.now()
 
     for notification in notifications:
@@ -30,6 +42,7 @@ def createNotification(notifications):
 def getUserUnseenNotifications(userId):
     ''' Get the unseen notifications '''
     db = connect(_collection)
+    mongoIndex(db)
 
     return db.find({
         '_userId': str(userId),
@@ -40,6 +53,7 @@ def getUserUnseenNotifications(userId):
 def getUserNotifications(userId, page, limit):
     ''' Get many notifications linked to a user '''
     db = connect(_collection)
+    mongoIndex(db)
 
     return db.find({
         '_userId': str(userId),
@@ -49,6 +63,7 @@ def getUserNotifications(userId, page, limit):
 def seenNotification(userId, notificationsId):
     ''' Set many notifications as seen '''
     db  = connect(_collection)
+    mongoIndex(db)
     now = datetime.now()
 
     # We convert string ObjectId literals into ObjectId one
@@ -69,6 +84,7 @@ def seenNotification(userId, notificationsId):
 def deleteNotification(userId, notificationsId):
     ''' Set many notifications as delete '''
     db  = connect(_collection)
+    mongoIndex(db)
     now = datetime.now()
 
     # We convert string ObjectId literals into ObjectId one
