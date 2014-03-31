@@ -44,6 +44,14 @@ def getBooleanRealValue(b):
 
 class ServiceRequestManager(JsonDefaultHandler):
     ''' Register a notification to user '''
+    def set_default_headers(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
+        self.set_header('Access-Control-Allow-Headers', 'origin, content-type, accept, authorization')
+        self.set_header('Access-Control-Allow-Credentials', 'true')
+        self.set_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD')
+        # 1209600: 14 days
+        self.set_header('Access-Control-Max-Age', '1209600')
+
     def post(self):
         # Before anything else, if APIKey is defined, we check it...
         APIKeyDefined = getCfg('APPLICATION', 'apikey')
