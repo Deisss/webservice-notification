@@ -3,6 +3,7 @@
 
 from system.DBMysql import connect
 from system.ConfigLoader import getCfg
+import logging
 
 def loginUser(login, password):
     ''' Try to login a user regarding login/password '''
@@ -13,6 +14,7 @@ def loginUser(login, password):
     tableLogin    = getCfg('MYSQL', 'loginField')
     tablePassword = getCfg('MYSQL', 'passwordField')
 
+    con = None
     try:
         # Starting
         con = connect()
@@ -32,7 +34,7 @@ def loginUser(login, password):
         if userContent is not None:
             userContent = userContent[0]
         
-    except db.Error as e:
+    except Exception as e:
         logging.error('loginUser: Error from MySQL => %s' % e)
     finally:
         if con:
